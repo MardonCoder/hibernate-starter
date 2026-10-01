@@ -3,6 +3,7 @@ package org.mardon.entity;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -18,5 +19,6 @@ public class PersonalInfo {
 
 //    @Convert(converter = BirthdayConverter.class)
 //    @Column(name = "birth_date")
+    @NotNull
     private Birthday birthDate;
 }

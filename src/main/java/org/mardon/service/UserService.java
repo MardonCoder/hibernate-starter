@@ -3,6 +3,7 @@ package org.mardon.service;
 import jakarta.persistence.AttributeNode;
 import jakarta.persistence.EntityGraph;
 import jakarta.transaction.Transactional;
+import jakarta.validation.*;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.graph.GraphSemantic;
 import org.mardon.dao.UserRepository;
@@ -12,9 +13,11 @@ import org.mardon.entity.User;
 import org.mardon.mapper.Mapper;
 import org.mardon.mapper.UserCreateMapper;
 import org.mardon.mapper.UserReadMapper;
+import org.mardon.validation.UpdateCheck;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class UserService {
@@ -25,6 +28,12 @@ public class UserService {
 
     @Transactional
     public Long create(UserCreateDto userDto){
+        var validatorFactory = Validation.buildDefaultValidatorFactory();
+        var validator = validatorFactory.getValidator();
+        var validationResult = validator.validate(userDto, UpdateCheck.class);
+        if (!validationResult.isEmpty()){
+            throw new ConstraintViolationException(validationResult);
+        }
 
         var userEntity = userCreateMapper.mapFrom(userDto);
         return userRepository.save(userEntity).getId();

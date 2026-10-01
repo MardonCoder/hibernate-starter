@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.NamedQuery;
+import jakarta.validation.Valid;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.*;
@@ -70,6 +71,7 @@ public class User implements Serializable {
     @ToString.Include
     private String username;  // must be serializable
 
+    @Valid // because personalInfo has constraint
     @Embedded
     @AttributeOverride(name = "birthDate", column = @Column(name = "birth_date"))
     @ToString.Include
