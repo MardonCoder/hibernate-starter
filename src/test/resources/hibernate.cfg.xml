@@ -1,0 +1,35 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Настройки подключения к БД -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+
+        <!-- Диалект и настройки вывода -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+        <property name="hibernate.cache.region_prefix.factory_class">org.hibernate.cache.jcache.internal.JCacheRegionFactory</property>
+        <property name="hibernate.javax.cache.uri">/ehcache-config.xml</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        
+        
+        <!-- Стратегия управления схемой БД
+         В МОЁМ СЛУЧАЕ Я ВРУЧНУЮ ВСЁ ДЕЛАЮ, НАДО ОТКЛЮЧИТЬ ВАЛИДАЦИЮ
+         -->
+        <property name="hibernate.hbm2ddl.auto">none</property>
+<!--        <property name="hibernate.connection.isolation">4</property>-->
+
+        <!-- Здесь позже будешь подключать свои классы-сущности -->
+        <mapping class="org.mardon.entity.User"/>
+        <mapping class="org.mardon.entity.Company"/>
+        <mapping class="org.mardon.entity.Profile"/>
+        <mapping class="org.mardon.entity.Programmer"/>
+        <mapping class="org.mardon.entity.Manager"/>
+        <mapping class="org.mardon.entity.Payment"/>
+        <mapping class="org.mardon.entity.Audit"/>
+    </session-factory>
+</hibernate-configuration>

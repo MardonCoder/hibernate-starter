@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Вывод в консоль -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- Новый аппендер для записи в файл с ротацией -->
+        <RollingFile name="FileLogger"
+                     fileName="logs/application.log"
+                     filePattern="logs/application-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+
+            <Policies>
+                <!-- Создавать новый файл каждый день -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- ИЛИ создавать новый файл при достижении размера 10 МБ -->
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+
+            <!-- Хранить максимум 10 архивов за один день -->
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.mardon" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="org.mardon.entity" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!-- Корневой логгер (по умолчанию для всех) -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+<!--            <AppenderRef ref="FileLogger"/>-->
+        </Root>
+    </Loggers>
+</Configuration>

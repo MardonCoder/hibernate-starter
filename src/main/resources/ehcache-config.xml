@@ -1,0 +1,43 @@
+<config
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.ehcache.org/v3"
+        xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+        xsi:schemaLocation="
+        http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
+        http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
+
+    <!-- Директория для дискового кэша (обязательна, если используется уровень <disk>) -->
+<!--    <persistence directory="./cache-data"/>-->
+
+    <!-- Шаблон настроек (позволяет переиспользовать конфигурацию для разных кэшей) -->
+    <cache-template name="simple">
+        <expiry>
+            <!-- Время жизни с момента создания (Time-To-Live) -->
+            <ttl unit="seconds">10</ttl>
+            <!-- Альтернатива: tti (Time-To-Idle) - время жизни с момента последнего доступа -->
+        </expiry>
+        <heap unit="entries">10</heap>
+    </cache-template>
+
+    <cache alias="Users" uses-template="simple"/>
+    <cache alias="Companies" uses-template="simple"/>
+
+    <!-- Конфигурация конкретного кэша -->
+<!--    <cache alias="Users" uses-template="simple">-->
+<!--        &lt;!&ndash; Строгая типизация ключей и значений &ndash;&gt;-->
+<!--        <key-type>java.lang.Long</key-type>-->
+<!--        <value-type>com.example.UserDTO</value-type>-->
+
+<!--        &lt;!&ndash; Многоуровневое хранилище (Tiering) &ndash;&gt;-->
+<!--        <resources>-->
+<!--            &lt;!&ndash; RAM внутри кучи JVM. Хранит ссылки на объекты. Быстро, но нагружает GC &ndash;&gt;-->
+<!--            <heap unit="entries">1000</heap>-->
+
+<!--            &lt;!&ndash; RAM вне кучи JVM. Данные сериализуются. Избавляет от пауз GC &ndash;&gt;-->
+<!--            <offheap unit="MB">100</offheap>-->
+
+<!--            &lt;!&ndash; Диск. persistent="true" означает выживание данных при перезапуске JVM &ndash;&gt;-->
+<!--            <disk persistent="true" unit="MB">500</disk>-->
+<!--        </resources>-->
+<!--    </cache>-->
+</config>

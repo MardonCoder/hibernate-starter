@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Настройки подключения к БД -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/postgres</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">pass</property>
+
+        <!-- Диалект и настройки вывода -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Стратегия управления схемой БД
+         В МОЁМ СЛУЧАЕ Я ВРУЧНУЮ ВСЁ ДЕЛАЮ, НАДО ОТКЛЮЧИТЬ ВАЛИДАЦИЮ
+         -->
+        <property name="hibernate.hbm2ddl.auto">none</property>
+
+        <!-- Здесь позже будешь подключать свои классы-сущности -->
+        <mapping class="org.mardon.entity.User"/>
+        <mapping class="org.mardon.entity.Company"/>
+        <mapping class="org.mardon.entity.Profile"/>
+        <mapping class="org.mardon.entity.Payment"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LanguageInjectionConfiguration">
+    <injection language="JSON" injector-id="java">
+      <display-name>UserBuilder.info (org.mardon.entity.User)</display-name>
+      <single-file value="false" />
+      <place><![CDATA[psiParameter().ofMethod(0, psiMethod().withName("info").withParameters("java.lang.String").definedInClass("org.mardon.entity.User.UserBuilder"))]]></place>
+    </injection>
+  </component>
+</project>
