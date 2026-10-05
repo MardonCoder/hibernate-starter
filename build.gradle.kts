@@ -24,8 +24,6 @@ dependencies {
 
     val assertjVersion = "3.27.7"
 
-    val h2Version = "2.4.240"
-
     val testContainerVersion = "1.21.4"
 
     val ehcacheVersion = "3.12.0"
