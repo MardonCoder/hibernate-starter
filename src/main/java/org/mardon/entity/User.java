@@ -51,7 +51,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
 @Cacheable
-@Cache(usage = CreacheConcurrencyStrategy.READ_WRITE, region = "Users")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Users")
 public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = -140244517970513571L;
